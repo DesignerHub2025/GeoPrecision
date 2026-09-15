@@ -1,0 +1,4401 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, viewport-fit=cover"
+>
+
+<meta name="theme-color" content="#071b32">
+
+<title>GeoPrecision Studio | Scientific GIS & Cartography</title>
+
+<meta
+  name="description"
+  content="GeoPrecision Studio — GIS, cartography, spatial analysis, remote sensing and research-ready maps."
+>
+
+<link rel="icon" href="logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cairo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================================================
+   GEO PRECISION — DESIGN SYSTEM
+========================================================= */
+
+:root{
+
+    --navy:#061a31;
+    --navy2:#082746;
+    --navy3:#0d355a;
+
+    --green:#008e69;
+    --green2:#00b98a;
+    --mint:#bdf8e4;
+
+    --paper:#f4f7f5;
+    --white:#ffffff;
+
+    --ink:#071624;
+    --muted:#687781;
+
+    --line:rgba(6,26,49,.12);
+    --line-dark:rgba(255,255,255,.12);
+
+    --radius:22px;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+    var(--paper);
+
+    color:
+    var(--ink);
+
+    font-family:
+    "Inter",
+    sans-serif;
+
+    overflow-x:hidden;
+
+    -webkit-font-smoothing:
+    antialiased;
+
+}
+
+body.ar{
+
+    font-family:
+    "Cairo",
+    sans-serif;
+
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    font:inherit;
+}
+
+img{
+    display:block;
+    max-width:100%;
+}
+
+button,
+a{
+    -webkit-tap-highlight-color:
+    transparent;
+}
+
+
+/* =========================================================
+   GLOBAL BACKGROUND
+========================================================= */
+
+.global-grid{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-5;
+
+    pointer-events:none;
+
+    background-image:
+
+    linear-gradient(
+        rgba(6,26,49,.025) 1px,
+        transparent 1px
+    ),
+
+    linear-gradient(
+        90deg,
+        rgba(6,26,49,.025) 1px,
+        transparent 1px
+    );
+
+    background-size:
+    54px 54px;
+
+}
+
+
+.glow-one,
+.glow-two{
+
+    position:fixed;
+
+    border-radius:50%;
+
+    filter:blur(140px);
+
+    pointer-events:none;
+
+    z-index:-4;
+
+}
+
+
+.glow-one{
+
+    width:420px;
+    height:420px;
+
+    top:-180px;
+    right:-150px;
+
+    background:
+    rgba(0,142,105,.15);
+
+}
+
+
+.glow-two{
+
+    width:390px;
+    height:390px;
+
+    bottom:-150px;
+    left:-170px;
+
+    background:
+    rgba(8,39,70,.12);
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+
+    width:
+    min(
+        100%,
+        1320px
+    );
+
+    margin:auto;
+
+    padding:
+    0 27px;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    height:92px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    border-bottom:
+    1px solid var(--line);
+
+}
+
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+}
+
+
+.brand-logo{
+
+    width:52px;
+    height:52px;
+
+    object-fit:contain;
+
+}
+
+
+.brand-name{
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    letter-spacing:-.03em;
+
+}
+
+
+.brand-name strong{
+
+    color:
+    var(--green);
+
+}
+
+
+.brand-sub{
+
+    display:block;
+
+    margin-top:2px;
+
+    color:
+    var(--muted);
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+
+}
+
+
+.header-nav{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
+}
+
+
+.header-nav a{
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.07em;
+
+    text-transform:uppercase;
+
+    transition:.2s;
+
+}
+
+
+.header-nav a:hover{
+
+    color:
+    var(--green);
+
+}
+
+
+.header-actions{
+
+    display:flex;
+
+    gap:8px;
+
+}
+
+
+.circle-btn{
+
+    width:44px;
+    height:44px;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+    1px solid
+    var(--line);
+
+    background:
+    rgba(255,255,255,.55);
+
+    color:
+    var(--navy);
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    transition:.25s;
+
+}
+
+
+.circle-btn:hover{
+
+    background:
+    var(--navy);
+
+    color:white;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    min-height:
+    calc(
+        100vh - 92px
+    );
+
+    display:grid;
+
+    grid-template-columns:
+    minmax(0,.94fr)
+    minmax(420px,1.06fr);
+
+    gap:
+    clamp(
+        30px,
+        5vw,
+        80px
+    );
+
+    align-items:center;
+
+    padding:
+    65px 0
+    75px;
+
+}
+
+
+/* =========================================================
+   HERO COPY
+========================================================= */
+
+.hero-copy{
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+
+.eyebrow{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    color:
+    var(--green);
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:.16em;
+
+    text-transform:uppercase;
+
+}
+
+
+.eyebrow::before{
+
+    content:"";
+
+    width:35px;
+    height:2px;
+
+    background:
+    var(--green);
+
+}
+
+
+.hero h1{
+
+    margin-top:24px;
+
+    font-family:
+    "Space Grotesk",
+    "Cairo",
+    sans-serif;
+
+    font-size:
+    clamp(
+        58px,
+        7vw,
+        102px
+    );
+
+    font-weight:700;
+
+    line-height:.91;
+
+    letter-spacing:-.065em;
+
+}
+
+
+body.ar .hero h1{
+
+    line-height:1.25;
+
+    letter-spacing:-.045em;
+
+    font-weight:900;
+
+}
+
+
+.hero h1 span{
+
+    display:block;
+
+}
+
+
+.hero h1 .precision{
+
+    color:
+    var(--green);
+
+}
+
+
+.hero h1 .outline{
+
+    color:transparent;
+
+    -webkit-text-stroke:
+    1px
+    rgba(6,26,49,.4);
+
+}
+
+
+.hero-copy-text{
+
+    max-width:500px;
+
+    margin-top:26px;
+
+    color:
+    var(--muted);
+
+    font-size:14px;
+
+    line-height:1.9;
+
+}
+
+
+.hero-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:28px;
+
+}
+
+
+.btn{
+
+    min-height:55px;
+
+    padding:
+    12px
+    21px;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    border-radius:12px;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    transition:.25s;
+
+}
+
+
+.btn-primary{
+
+    background:
+    var(--navy);
+
+    color:white;
+
+    box-shadow:
+    0 12px 32px
+    rgba(6,26,49,.13);
+
+}
+
+
+.btn-primary:hover{
+
+    transform:
+    translateY(-3px);
+
+    background:
+    var(--navy2);
+
+}
+
+
+.btn-green{
+
+    color:
+    var(--green);
+
+    border:
+    1px solid
+    rgba(0,142,105,.25);
+
+    background:
+    rgba(0,142,105,.05);
+
+}
+
+
+.btn-green:hover{
+
+    background:
+    rgba(0,142,105,.11);
+
+    transform:
+    translateY(-3px);
+
+}
+
+
+.arrow{
+
+    font-family:
+    Arial,
+    sans-serif;
+
+    font-size:18px;
+
+}
+
+
+html[dir="rtl"]
+.arrow{
+
+    transform:
+    scaleX(-1);
+
+}
+
+
+.hero-meta{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:8px;
+
+    margin-top:28px;
+
+}
+
+
+.hero-chip{
+
+    padding:
+    8px 11px;
+
+    border-radius:100px;
+
+    border:
+    1px solid
+    var(--line);
+
+    background:
+    rgba(255,255,255,.55);
+
+    color:
+    #52616b;
+
+    font-size:9px;
+
+    font-weight:800;
+
+}
+
+
+/* =========================================================
+   SPATIAL VISUAL
+========================================================= */
+
+.spatial-stage{
+
+    height:610px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:
+    36px
+    9px
+    36px
+    9px;
+
+    background:
+    var(--navy);
+
+    isolation:isolate;
+
+    box-shadow:
+    0 35px 80px
+    rgba(6,26,49,.15);
+
+}
+
+
+/* MAP GRID */
+
+.stage-grid{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:-5;
+
+    background-image:
+
+    linear-gradient(
+        rgba(255,255,255,.055) 1px,
+        transparent 1px
+    ),
+
+    linear-gradient(
+        90deg,
+        rgba(255,255,255,.055) 1px,
+        transparent 1px
+    );
+
+    background-size:
+    45px 45px;
+
+}
+
+
+/* CROSSHAIR */
+
+.crosshair{
+
+    position:absolute;
+
+    width:390px;
+    height:390px;
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(255,255,255,.13);
+
+    left:50%;
+    top:48%;
+
+    transform:
+    translate(-50%,-50%);
+
+}
+
+
+.crosshair::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:35px;
+
+    border-radius:50%;
+
+    border:
+    1px dashed
+    rgba(255,255,255,.17);
+
+}
+
+
+.crosshair::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:-70px;
+
+    width:1px;
+    height:530px;
+
+    background:
+    linear-gradient(
+        transparent,
+        rgba(255,255,255,.24),
+        transparent
+    );
+
+}
+
+
+/* =========================================================
+   TOPOGRAPHIC SVG
+========================================================= */
+
+.topography{
+
+    position:absolute;
+
+    width:120%;
+    height:120%;
+
+    left:-10%;
+    top:-10%;
+
+    opacity:.27;
+
+}
+
+
+.topography path{
+
+    fill:none;
+
+    stroke:
+    rgba(189,248,228,.72);
+
+    stroke-width:1.1;
+
+    stroke-dasharray:
+    4 5;
+
+    animation:
+    topoMove
+    18s linear
+    infinite;
+
+}
+
+
+@keyframes topoMove{
+
+    to{
+
+        stroke-dashoffset:
+        -120;
+
+    }
+
+}
+
+
+/* =========================================================
+   LAYER STACK
+========================================================= */
+
+.map-stack{
+
+    position:absolute;
+
+    width:340px;
+    height:280px;
+
+    left:50%;
+    top:52%;
+
+    transform:
+    translate(-50%,-50%);
+
+    perspective:
+    900px;
+
+}
+
+
+.map-layer{
+
+    position:absolute;
+
+    width:290px;
+    height:180px;
+
+    left:25px;
+
+    border-radius:16px;
+
+    border:
+    1px solid
+    rgba(255,255,255,.22);
+
+    backdrop-filter:
+    blur(8px);
+
+    transform:
+    rotateX(58deg)
+    rotateZ(-27deg);
+
+    transition:
+    .5s cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.layer-1{
+
+    top:86px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(0,142,105,.8),
+        rgba(0,142,105,.18)
+    );
+
+}
+
+
+.layer-2{
+
+    top:40px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,255,255,.18),
+        rgba(255,255,255,.05)
+    );
+
+}
+
+
+.layer-3{
+
+    top:-7px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(12,67,109,.9),
+        rgba(255,255,255,.05)
+    );
+
+}
+
+
+.spatial-stage:hover
+.layer-1{
+
+    transform:
+    translateY(17px)
+    rotateX(58deg)
+    rotateZ(-27deg);
+
+}
+
+
+.spatial-stage:hover
+.layer-2{
+
+    transform:
+    translateY(-3px)
+    rotateX(58deg)
+    rotateZ(-27deg);
+
+}
+
+
+.spatial-stage:hover
+.layer-3{
+
+    transform:
+    translateY(-25px)
+    rotateX(58deg)
+    rotateZ(-27deg);
+
+}
+
+
+/* fake map geometry */
+
+.map-layer::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:19px;
+
+    border-radius:8px;
+
+    background:
+
+    radial-gradient(
+        circle at 62% 48%,
+        rgba(0,185,138,.95) 0 7px,
+        transparent 8px
+    ),
+
+    linear-gradient(
+        30deg,
+        transparent 42%,
+        rgba(255,255,255,.45) 43% 44%,
+        transparent 45%
+    ),
+
+    linear-gradient(
+        -18deg,
+        transparent 54%,
+        rgba(255,255,255,.28) 55% 56%,
+        transparent 57%
+    );
+
+}
+
+
+/* =========================================================
+   LOGO IN MAP
+========================================================= */
+
+.stage-logo{
+
+    position:absolute;
+
+    top:30px;
+    left:30px;
+
+    width:88px;
+    height:88px;
+
+    border-radius:20px;
+
+    padding:8px;
+
+    background:
+    rgba(255,255,255,.94);
+
+    display:grid;
+
+    place-items:center;
+
+    box-shadow:
+    0 10px 30px
+    rgba(0,0,0,.18);
+
+}
+
+
+.stage-logo img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+}
+
+
+.stage-label{
+
+    position:absolute;
+
+    top:33px;
+    right:29px;
+
+    color:
+    rgba(255,255,255,.7);
+
+    text-align:right;
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:8px;
+
+    font-weight:700;
+
+    line-height:1.8;
+
+    letter-spacing:.12em;
+
+}
+
+
+.stage-bottom{
+
+    position:absolute;
+
+    left:28px;
+    right:28px;
+    bottom:26px;
+
+    display:flex;
+
+    align-items:end;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+}
+
+
+.stage-bottom h3{
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:
+    clamp(
+        26px,
+        4vw,
+        43px
+    );
+
+    line-height:.95;
+
+    letter-spacing:-.04em;
+
+}
+
+
+.stage-bottom h3
+span{
+
+    color:
+    var(--green2);
+
+}
+
+
+.coordinate{
+
+    text-align:right;
+
+    color:
+    rgba(255,255,255,.55);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    line-height:1.7;
+
+    letter-spacing:.12em;
+
+}
+
+
+/* =========================================================
+   DATA STRIP
+========================================================= */
+
+.data-strip{
+
+    background:
+    var(--navy);
+
+    color:white;
+
+    overflow:hidden;
+
+}
+
+
+.data-track{
+
+    width:max-content;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:27px;
+
+    padding:
+    15px 0;
+
+    animation:
+    dataMove
+    24s linear
+    infinite;
+
+}
+
+
+.data-track span{
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:.09em;
+
+    text-transform:uppercase;
+
+}
+
+
+.data-track b{
+
+    width:6px;
+    height:6px;
+
+    background:
+    var(--green2);
+
+    transform:
+    rotate(45deg);
+
+}
+
+
+@keyframes dataMove{
+
+    to{
+
+        transform:
+        translateX(-50%);
+
+    }
+
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.services{
+
+    margin-inline:
+    calc(
+        (100vw - 100%) / -2
+    );
+
+    background:
+    var(--navy);
+
+    color:white;
+
+    padding:
+    105px
+    max(
+        27px,
+        calc(
+            (100vw - 1266px) / 2
+        )
+    );
+
+}
+
+
+.section-head{
+
+    display:grid;
+
+    grid-template-columns:
+    .75fr 1.25fr;
+
+    gap:45px;
+
+    align-items:start;
+
+}
+
+
+.section-id{
+
+    color:
+    var(--green2);
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:.12em;
+
+}
+
+
+.section-title{
+
+    font-family:
+    "Space Grotesk",
+    "Cairo",
+    sans-serif;
+
+    font-size:
+    clamp(
+        40px,
+        5vw,
+        67px
+    );
+
+    line-height:1.05;
+
+    letter-spacing:-.045em;
+
+}
+
+
+body.ar
+.section-title{
+
+    line-height:1.4;
+
+    font-weight:900;
+
+}
+
+
+.services-grid{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        3,
+        minmax(0,1fr)
+    );
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.14);
+
+}
+
+
+.service{
+
+    position:relative;
+
+    min-height:270px;
+
+    padding:
+    30px 26px;
+
+    border-right:
+    1px solid
+    rgba(255,255,255,.12);
+
+    transition:.3s;
+
+}
+
+
+.service:nth-child(3n){
+
+    border-right:none;
+
+}
+
+
+.service:nth-child(n+4){
+
+    border-top:
+    1px solid
+    rgba(255,255,255,.12);
+
+}
+
+
+.service:hover{
+
+    background:
+    rgba(255,255,255,.035);
+
+}
+
+
+.service-number{
+
+    color:
+    var(--green2);
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:11px;
+
+    font-weight:700;
+
+}
+
+
+.service-icon{
+
+    width:43px;
+    height:43px;
+
+    border-radius:50%;
+
+    margin-top:32px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+    1px solid
+    rgba(255,255,255,.18);
+
+    color:
+    var(--mint);
+
+    font-size:19px;
+
+}
+
+
+.service h3{
+
+    margin-top:20px;
+
+    font-size:18px;
+
+    font-weight:800;
+
+}
+
+
+.service p{
+
+    margin-top:9px;
+
+    color:
+    #8fa19b;
+
+    font-size:11px;
+
+    line-height:1.9;
+
+}
+
+
+/* =========================================================
+   WORKFLOW
+========================================================= */
+
+.workflow{
+
+    padding:
+    100px 0;
+
+}
+
+
+.workflow-head{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:end;
+
+    gap:40px;
+
+    margin-bottom:43px;
+
+}
+
+
+.workflow-head h2{
+
+    font-family:
+    "Space Grotesk",
+    "Cairo",
+    sans-serif;
+
+    font-size:
+    clamp(
+        36px,
+        4.2vw,
+        58px
+    );
+
+    letter-spacing:-.04em;
+
+}
+
+
+.workflow-head p{
+
+    max-width:390px;
+
+    color:
+    var(--muted);
+
+    font-size:12px;
+
+    line-height:1.9;
+
+}
+
+
+.workflow-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:10px;
+
+}
+
+
+.workflow-step{
+
+    min-height:205px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:24px;
+
+    border:
+    1px solid
+    var(--line);
+
+    border-radius:18px;
+
+    background:
+    rgba(255,255,255,.62);
+
+}
+
+
+.workflow-step::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(0,142,105,.13);
+
+    right:-35px;
+    bottom:-35px;
+
+}
+
+
+.workflow-step span{
+
+    color:
+    var(--green);
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:11px;
+
+    font-weight:800;
+
+}
+
+
+.workflow-step h3{
+
+    margin-top:47px;
+
+    font-size:18px;
+
+}
+
+
+.workflow-step p{
+
+    margin-top:8px;
+
+    color:
+    var(--muted);
+
+    font-size:10px;
+
+    line-height:1.8;
+
+}
+
+
+/* =========================================================
+   SOCIAL AREA
+========================================================= */
+
+.social{
+
+    padding:
+    25px 0
+    100px;
+
+}
+
+
+.social-head{
+
+    margin-bottom:32px;
+
+}
+
+
+.social-head h2{
+
+    font-family:
+    "Space Grotesk",
+    "Cairo",
+    sans-serif;
+
+    font-size:
+    clamp(
+        39px,
+        5vw,
+        65px
+    );
+
+    letter-spacing:-.045em;
+
+}
+
+
+.social-head p{
+
+    color:
+    var(--muted);
+
+    margin-top:10px;
+
+    font-size:12px;
+
+}
+
+
+.social-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    1.15fr .85fr;
+
+    gap:14px;
+
+}
+
+
+.social-card{
+
+    min-height:340px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:29px;
+
+    border-radius:24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    color:white;
+
+    transition:.3s;
+
+}
+
+
+.social-card:hover{
+
+    transform:
+    translateY(-5px);
+
+}
+
+
+.instagram{
+
+    background:
+
+    radial-gradient(
+        circle at 100% 0%,
+        rgba(0,185,138,.4),
+        transparent 40%
+    ),
+
+    var(--navy);
+
+}
+
+
+.tiktok{
+
+    background:
+
+    radial-gradient(
+        circle at 0% 100%,
+        rgba(0,142,105,.35),
+        transparent 45%
+    ),
+
+    #101a1d;
+
+}
+
+
+.social-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:330px;
+    height:330px;
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(255,255,255,.09);
+
+    right:-135px;
+    bottom:-150px;
+
+}
+
+
+.social-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+}
+
+
+.social-platform{
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:.11em;
+
+}
+
+
+.social-symbol{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+    1px solid
+    rgba(255,255,255,.25);
+
+}
+
+
+.social-card h3{
+
+    max-width:440px;
+
+    font-family:
+    "Space Grotesk",
+    "Cairo",
+    sans-serif;
+
+    font-size:
+    clamp(
+        31px,
+        4vw,
+        48px
+    );
+
+    line-height:1.08;
+
+}
+
+
+body.ar
+.social-card h3{
+
+    line-height:1.45;
+
+}
+
+
+.social-bottom{
+
+    display:flex;
+
+    align-items:end;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+}
+
+
+.social-bottom p{
+
+    max-width:320px;
+
+    color:
+    rgba(255,255,255,.62);
+
+    font-size:11px;
+
+    line-height:1.8;
+
+}
+
+
+.social-arrow{
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    flex:0 0 50px;
+
+    display:grid;
+
+    place-items:center;
+
+    border:
+    1px solid
+    rgba(255,255,255,.35);
+
+    font-size:20px;
+
+}
+
+
+/* =========================================================
+   FINAL CTA
+========================================================= */
+
+.cta{
+
+    margin-bottom:55px;
+
+    padding:
+    42px;
+
+    border-radius:25px;
+
+    background:
+    var(--green);
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:35px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.cta::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    border:
+    1px solid
+    rgba(255,255,255,.18);
+
+    right:-95px;
+    top:-105px;
+
+}
+
+
+.cta h2{
+
+    font-family:
+    "Space Grotesk",
+    "Cairo",
+    sans-serif;
+
+    font-size:
+    clamp(
+        28px,
+        4vw,
+        46px
+    );
+
+    line-height:1.1;
+
+}
+
+
+body.ar
+.cta h2{
+
+    line-height:1.45;
+
+}
+
+
+.cta p{
+
+    margin-top:8px;
+
+    color:
+    rgba(255,255,255,.72);
+
+    font-size:11px;
+
+}
+
+
+.cta-button{
+
+    min-width:190px;
+
+    min-height:53px;
+
+    padding:
+    12px 18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    border-radius:12px;
+
+    background:white;
+
+    color:
+    var(--green);
+
+    font-size:11px;
+
+    font-weight:900;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    padding:
+    27px 0
+    38px;
+
+    border-top:
+    1px solid
+    var(--line);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
+.footer-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.footer-left img{
+
+    width:39px;
+    height:39px;
+
+    object-fit:contain;
+
+}
+
+
+.footer strong{
+
+    font-family:
+    "Space Grotesk",
+    sans-serif;
+
+    font-size:14px;
+
+}
+
+
+.footer p{
+
+    color:
+    var(--muted);
+
+    font-size:9px;
+
+    margin-top:2px;
+
+}
+
+
+.footer-right{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:17px;
+
+    color:
+    var(--muted);
+
+    font-size:8px;
+
+    font-weight:700;
+
+    letter-spacing:.07em;
+
+}
+
+
+/* =========================================================
+   FLOATING BUTTON
+========================================================= */
+
+.floating-instagram{
+
+    position:fixed;
+
+    right:19px;
+
+    bottom:
+    calc(
+        19px +
+        env(safe-area-inset-bottom)
+    );
+
+    z-index:40;
+
+    width:58px;
+    height:58px;
+
+    border-radius:50%;
+
+    display:grid;
+
+    place-items:center;
+
+    background:
+    var(--navy);
+
+    color:white;
+
+    box-shadow:
+    0 14px 40px
+    rgba(6,26,49,.25);
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+
+.floating-instagram:hover{
+
+    transform:
+    scale(1.07);
+
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+    translateY(22px);
+
+    transition:
+    opacity .65s ease,
+    transform .65s ease;
+
+}
+
+
+.reveal.visible{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+    .header-nav{
+        display:none;
+    }
+
+    .hero{
+
+        grid-template-columns:
+        1fr;
+
+        min-height:auto;
+
+        padding-top:50px;
+
+    }
+
+    .hero-copy{
+
+        text-align:center;
+
+    }
+
+    .eyebrow,
+    .hero-actions,
+    .hero-meta{
+
+        justify-content:center;
+
+    }
+
+    .hero-copy-text{
+
+        margin-inline:auto;
+
+    }
+
+    .spatial-stage{
+
+        height:540px;
+
+    }
+
+    .section-head{
+
+        grid-template-columns:
+        1fr;
+
+        gap:14px;
+
+    }
+
+    .workflow-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+
+@media(max-width:680px){
+
+    .page{
+
+        padding:
+        0 14px;
+
+    }
+
+    .header{
+
+        height:78px;
+
+    }
+
+    .brand-logo{
+
+        width:43px;
+        height:43px;
+
+    }
+
+    .brand-name{
+
+        font-size:15px;
+
+    }
+
+    .brand-sub{
+
+        font-size:7px;
+
+    }
+
+    .circle-btn{
+
+        width:40px;
+        height:40px;
+
+    }
+
+    .header-actions{
+
+        gap:5px;
+
+    }
+
+    .hero{
+
+        padding:
+        39px 0
+        50px;
+
+        gap:32px;
+
+    }
+
+    .hero h1{
+
+        font-size:
+        clamp(
+            54px,
+            16vw,
+            83px
+        );
+
+    }
+
+    body.ar
+    .hero h1{
+
+        font-size:
+        clamp(
+            40px,
+            11vw,
+            60px
+        );
+
+    }
+
+    .hero-copy-text{
+
+        font-size:12px;
+
+    }
+
+    .hero-actions{
+
+        width:100%;
+
+    }
+
+    .hero-actions .btn{
+
+        flex:1;
+
+        min-width:135px;
+
+        padding:
+        11px 9px;
+
+    }
+
+    .spatial-stage{
+
+        height:430px;
+
+        border-radius:
+        27px
+        8px
+        27px
+        8px;
+
+    }
+
+    .stage-logo{
+
+        width:67px;
+        height:67px;
+
+        top:20px;
+        left:20px;
+
+    }
+
+    .stage-label{
+
+        top:23px;
+        right:20px;
+
+        font-size:6px;
+
+    }
+
+    .crosshair{
+
+        width:295px;
+        height:295px;
+
+    }
+
+    .map-stack{
+
+        transform:
+        translate(-50%,-48%)
+        scale(.78);
+
+    }
+
+    .stage-bottom{
+
+        left:20px;
+        right:20px;
+        bottom:19px;
+
+    }
+
+    .coordinate{
+
+        font-size:6px;
+
+    }
+
+    .services{
+
+        padding-top:72px;
+        padding-bottom:72px;
+
+    }
+
+    .services-grid{
+
+        grid-template-columns:
+        1fr;
+
+        margin-top:38px;
+
+    }
+
+    .service{
+
+        min-height:auto;
+
+        padding:
+        25px 10px;
+
+        border-right:0;
+
+        border-bottom:
+        1px solid
+        rgba(255,255,255,.12);
+
+    }
+
+    .service:nth-child(n+4){
+
+        border-top:0;
+
+    }
+
+    .service-icon{
+
+        margin-top:18px;
+
+    }
+
+    .workflow{
+
+        padding:
+        72px 0;
+
+    }
+
+    .workflow-head{
+
+        display:block;
+
+    }
+
+    .workflow-head p{
+
+        margin-top:12px;
+
+    }
+
+    .workflow-grid{
+
+        grid-template-columns:
+        1fr 1fr;
+
+    }
+
+    .workflow-step{
+
+        min-height:180px;
+
+        padding:20px;
+
+    }
+
+    .workflow-step h3{
+
+        margin-top:35px;
+
+    }
+
+    .social{
+
+        padding-bottom:72px;
+
+    }
+
+    .social-grid{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .social-card{
+
+        min-height:290px;
+
+        padding:24px;
+
+    }
+
+    .cta{
+
+        display:block;
+
+        padding:30px;
+
+    }
+
+    .cta-button{
+
+        margin-top:23px;
+
+        width:100%;
+
+    }
+
+    .footer{
+
+        padding-bottom:95px;
+
+        align-items:flex-start;
+
+    }
+
+    .footer-right{
+
+        flex-direction:column;
+
+        gap:3px;
+
+        text-align:right;
+
+    }
+
+}
+
+
+@media(max-width:400px){
+
+    .brand-sub{
+        display:none;
+    }
+
+    .workflow-grid{
+
+        grid-template-columns:
+        1fr;
+
+    }
+
+    .workflow-step{
+
+        min-height:145px;
+
+    }
+
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+    }
+
+    .reveal{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="global-grid"></div>
+<div class="glow-one"></div>
+<div class="glow-two"></div>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+HEADER
+===================================================== -->
+
+<header class="header">
+
+
+<a
+class="brand"
+href="#top"
+>
+
+
+<img
+src="logo.png"
+class="brand-logo"
+alt="GeoPrecision Studio"
+>
+
+
+<div>
+
+
+<div class="brand-name">
+
+Geo<strong>Precision</strong>
+
+</div>
+
+
+<span
+class="brand-sub"
+
+data-en="SCIENTIFIC GIS & CARTOGRAPHY"
+data-fr="SIG SCIENTIFIQUE & CARTOGRAPHIE"
+data-ar="نظم المعلومات الجغرافية والخرائط العلمية"
+>
+
+SCIENTIFIC GIS & CARTOGRAPHY
+
+</span>
+
+
+</div>
+
+
+</a>
+
+
+
+<nav class="header-nav">
+
+
+<a
+href="#services"
+
+data-en="Services"
+data-fr="Services"
+data-ar="الخدمات"
+>
+
+Services
+
+</a>
+
+
+<a
+href="#workflow"
+
+data-en="Workflow"
+data-fr="Méthode"
+data-ar="طريقة العمل"
+>
+
+Workflow
+
+</a>
+
+
+<a
+href="#connect"
+
+data-en="Connect"
+data-fr="Contact"
+data-ar="تواصل"
+>
+
+Connect
+
+</a>
+
+
+</nav>
+
+
+
+<div class="header-actions">
+
+
+<button
+class="circle-btn"
+id="languageButton"
+type="button"
+>
+
+FR
+
+</button>
+
+
+<button
+class="circle-btn"
+id="shareButton"
+type="button"
+aria-label="Share"
+>
+
+↗
+
+</button>
+
+
+</div>
+
+
+</header>
+
+
+
+<!-- =====================================================
+HERO
+===================================================== -->
+
+<section
+class="hero"
+id="top"
+>
+
+
+<div class="hero-copy">
+
+
+<div
+class="eyebrow"
+
+data-en="SPATIAL INTELLIGENCE FOR RESEARCH"
+data-fr="INTELLIGENCE SPATIALE POUR LA RECHERCHE"
+data-ar="ذكاء مكاني لخدمة البحث العلمي"
+>
+
+SPATIAL INTELLIGENCE FOR RESEARCH
+
+</div>
+
+
+
+<h1>
+
+
+<span
+data-en="MAP THE"
+data-fr="CARTOGRAPHIER"
+data-ar="نحوّل"
+>
+
+MAP THE
+
+</span>
+
+
+<span
+class="precision"
+
+data-en="QUESTION."
+data-fr="L'ESSENTIEL."
+data-ar="البيانات"
+>
+
+QUESTION.
+
+</span>
+
+
+<span
+class="outline"
+
+data-en="REVEAL THE ANSWER."
+data-fr="RÉVÉLER L'ESPACE."
+data-ar="إلى معرفة مكانية."
+>
+
+REVEAL THE ANSWER.
+
+</span>
+
+
+</h1>
+
+
+
+<p
+class="hero-copy-text"
+
+data-en="Professional GIS, cartography and spatial analysis for students, researchers and scientific projects — from raw geographic data to clear, publication-ready maps."
+
+data-fr="SIG, cartographie et analyse spatiale pour étudiants, chercheurs et projets scientifiques — des données géographiques brutes jusqu'aux cartes claires et prêtes pour la publication."
+
+data-ar="نحوّل البيانات الجغرافية الخام إلى تحليلات وخرائط علمية واضحة ومهيأة للبحث والنشر، لطلبة الماستر والدكتوراه والباحثين."
+>
+
+Professional GIS, cartography and spatial analysis
+for students, researchers and scientific projects —
+from raw geographic data to clear,
+publication-ready maps.
+
+</p>
+
+
+
+<div class="hero-actions">
+
+
+<a
+class="btn btn-primary"
+href="https://www.instagram.com/geoprecision_studio?stkn=YjE4dHNuZmlzMTYw&utm_source=qr"
+target="_blank"
+rel="noopener noreferrer"
+>
+
+
+<span
+data-en="START A GIS PROJECT"
+data-fr="DÉMARRER UN PROJET SIG"
+data-ar="ابدأ مشروعك الجغرافي"
+>
+
+START A GIS PROJECT
+
+</span>
+
+
+<span class="arrow">
+
+→
+
+</span>
+
+
+</a>
+
+
+
+<a
+class="btn btn-green"
+href="#services"
+>
+
+
+<span
+data-en="EXPLORE SERVICES"
+data-fr="VOIR LES SERVICES"
+data-ar="اكتشف الخدمات"
+>
+
+EXPLORE SERVICES
+
+</span>
+
+
+<span class="arrow">
+
+↓
+
+</span>
+
+
+</a>
+
+
+</div>
+
+
+
+<div class="hero-meta">
+
+
+<span class="hero-chip">
+
+ArcGIS Pro
+
+</span>
+
+
+<span class="hero-chip">
+
+QGIS
+
+</span>
+
+
+<span class="hero-chip">
+
+Remote Sensing
+
+</span>
+
+
+<span class="hero-chip">
+
+R
+
+</span>
+
+
+<span
+class="hero-chip"
+
+data-en="Research Maps"
+data-fr="Cartes de recherche"
+data-ar="خرائط البحث"
+>
+
+Research Maps
+
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+SPATIAL VISUAL
+===================================================== -->
+
+<div class="spatial-stage">
+
+
+<div class="stage-grid"></div>
+
+
+<svg
+class="topography"
+viewBox="0 0 700 700"
+aria-hidden="true"
+>
+
+
+<path
+d="M-20 130 C90 35 165 55 250 120 S430 210 720 70"
+/>
+
+<path
+d="M-30 180 C75 70 180 92 280 145 S445 240 730 115"
+/>
+
+<path
+d="M-20 235 C100 125 180 130 295 205 S495 280 725 160"
+/>
+
+<path
+d="M-25 300 C90 190 208 188 318 265 S480 350 730 225"
+/>
+
+<path
+d="M-20 365 C82 270 215 250 340 325 S545 415 730 300"
+/>
+
+<path
+d="M-20 430 C110 335 218 335 365 405 S560 485 730 370"
+/>
+
+<path
+d="M-20 505 C95 405 235 410 385 470 S575 560 730 445"
+/>
+
+<path
+d="M-20 575 C100 480 260 475 410 550 S600 630 730 520"
+/>
+
+</svg>
+
+
+
+<div class="crosshair"></div>
+
+
+
+<div class="map-stack">
+
+
+<div class="map-layer layer-1"></div>
+
+<div class="map-layer layer-2"></div>
+
+<div class="map-layer layer-3"></div>
+
+
+</div>
+
+
+
+<div class="stage-logo">
+
+
+<img
+src="logo.png"
+alt="GeoPrecision Studio Logo"
+>
+
+
+</div>
+
+
+
+<div class="stage-label"
+dir="ltr"
+>
+
+GEOSPATIAL LAB<br>
+GIS / RS / CARTOGRAPHY<br>
+RESEARCH OUTPUT
+
+</div>
+
+
+
+<div class="stage-bottom">
+
+
+<h3
+dir="ltr"
+>
+
+DATA →<br>
+<span>DECISION.</span>
+
+</h3>
+
+
+<div
+class="coordinate"
+dir="ltr"
+>
+
+SPATIAL ANALYSIS<br>
+CARTOGRAPHIC DESIGN<br>
+REMOTE SENSING
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+MOVING DATA STRIP
+===================================================== -->
+
+</div>
+
+
+<div class="data-strip">
+
+
+<div class="data-track">
+
+
+<span>GIS</span><b></b>
+
+<span>CARTOGRAPHY</span><b></b>
+
+<span>SPATIAL ANALYSIS</span><b></b>
+
+<span>REMOTE SENSING</span><b></b>
+
+<span>PUBLICATION-READY MAPS</span><b></b>
+
+<span>STATISTICAL ANALYSIS · R</span><b></b>
+
+<span>MASTER · PHD · RESEARCH</span><b></b>
+
+
+<span>GIS</span><b></b>
+
+<span>CARTOGRAPHY</span><b></b>
+
+<span>SPATIAL ANALYSIS</span><b></b>
+
+<span>REMOTE SENSING</span><b></b>
+
+<span>PUBLICATION-READY MAPS</span><b></b>
+
+<span>STATISTICAL ANALYSIS · R</span><b></b>
+
+<span>MASTER · PHD · RESEARCH</span><b></b>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="page">
+
+
+<!-- =====================================================
+SERVICES
+===================================================== -->
+
+<section
+class="services"
+id="services"
+>
+
+
+<div class="section-head reveal">
+
+
+<div class="section-id"
+dir="ltr"
+>
+
+01 / WHAT WE DO
+
+</div>
+
+
+<h2
+class="section-title"
+
+data-en="GEOGRAPHIC DATA, TRANSFORMED WITH PURPOSE."
+
+data-fr="DONNER DU SENS AUX DONNÉES GÉOGRAPHIQUES."
+
+data-ar="من البيانات الجغرافية إلى نتائج قابلة للفهم والاستخدام."
+>
+
+GEOGRAPHIC DATA,<br>
+TRANSFORMED WITH PURPOSE.
+
+</h2>
+
+
+</div>
+
+
+
+<div class="services-grid">
+
+
+<article class="service reveal">
+
+
+<span class="service-number">
+
+01
+
+</span>
+
+
+<div class="service-icon">
+
+⌖
+
+</div>
+
+
+<h3
+data-en="GIS & Spatial Analysis"
+data-fr="SIG & Analyse spatiale"
+data-ar="GIS والتحليل المكاني"
+>
+
+GIS & Spatial Analysis
+
+</h3>
+
+
+<p
+data-en="Spatial relationships, accessibility, proximity, networks and geographic decision-support."
+
+data-fr="Relations spatiales, accessibilité, proximité, réseaux et aide à la décision géographique."
+
+data-ar="تحليل العلاقات المكانية، الوصول، القرب، الشبكات ودعم القرار الجغرافي."
+>
+
+Spatial relationships, accessibility,
+proximity, networks and geographic
+decision-support.
+
+</p>
+
+
+</article>
+
+
+
+<article class="service reveal">
+
+
+<span class="service-number">
+
+02
+
+</span>
+
+
+<div class="service-icon">
+
+▱
+
+</div>
+
+
+<h3
+data-en="Cartographic Design"
+data-fr="Conception cartographique"
+data-ar="التصميم الكارتوغرافي"
+>
+
+Cartographic Design
+
+</h3>
+
+
+<p
+data-en="Clear scientific maps for reports, dissertations, theses, articles and presentations."
+
+data-fr="Cartes scientifiques pour rapports, mémoires, thèses, articles et présentations."
+
+data-ar="خرائط علمية واضحة للتقارير والمذكرات والأطروحات والمقالات والعروض."
+>
+
+Clear scientific maps for reports,
+dissertations, theses, articles
+and presentations.
+
+</p>
+
+
+</article>
+
+
+
+<article class="service reveal">
+
+
+<span class="service-number">
+
+03
+
+</span>
+
+
+<div class="service-icon">
+
+◈
+
+</div>
+
+
+<h3
+data-en="Remote Sensing"
+data-fr="Télédétection"
+data-ar="الاستشعار عن بعد"
+>
+
+Remote Sensing
+
+</h3>
+
+
+<p
+data-en="Satellite imagery workflows and spatial information extraction for geographic studies."
+
+data-fr="Traitement d'images satellitaires et extraction d'informations pour les études géographiques."
+
+data-ar="معالجة صور الأقمار الصناعية واستخراج المعلومات المكانية للدراسات الجغرافية."
+>
+
+Satellite imagery workflows
+and spatial information extraction
+for geographic studies.
+
+</p>
+
+
+</article>
+
+
+
+<article class="service reveal">
+
+
+<span class="service-number">
+
+04
+
+</span>
+
+
+<div class="service-icon">
+
+R
+
+</div>
+
+
+<h3
+data-en="Statistical Analysis"
+data-fr="Analyse statistique"
+data-ar="التحليل الإحصائي"
+>
+
+Statistical Analysis
+
+</h3>
+
+
+<p
+data-en="Statistical exploration and visualization using R for research-oriented datasets."
+
+data-fr="Exploration statistique et visualisation avec R pour les données de recherche."
+
+data-ar="استكشاف وتحليل وعرض البيانات البحثية إحصائيًا باستخدام R."
+>
+
+Statistical exploration
+and visualization using R
+for research-oriented datasets.
+
+</p>
+
+
+</article>
+
+
+
+<article class="service reveal">
+
+
+<span class="service-number">
+
+05
+
+</span>
+
+
+<div class="service-icon">
+
+△
+
+</div>
+
+
+<h3
+data-en="Publication-Ready Maps"
+data-fr="Cartes prêtes à publier"
+data-ar="خرائط جاهزة للنشر"
+>
+
+Publication-Ready Maps
+
+</h3>
+
+
+<p
+data-en="Professional layouts designed for scientific readability and academic publication workflows."
+
+data-fr="Mises en page professionnelles pensées pour la lisibilité scientifique et la publication académique."
+
+data-ar="إخراج خرائطي احترافي يراعي الوضوح العلمي ومتطلبات العمل الأكاديمي."
+>
+
+Professional layouts designed
+for scientific readability
+and academic publication workflows.
+
+</p>
+
+
+</article>
+
+
+
+<article class="service reveal">
+
+
+<span class="service-number">
+
+06
+
+</span>
+
+
+<div class="service-icon">
+
+◇
+
+</div>
+
+
+<h3
+data-en="Research Support"
+data-fr="Accompagnement recherche"
+data-ar="دعم الباحثين"
+>
+
+Research Support
+
+</h3>
+
+
+<p
+data-en="GIS outputs for Master's, PhD and research projects — from the spatial question to the final map."
+
+data-fr="Résultats SIG pour Master, doctorat et recherche — de la question spatiale jusqu'à la carte finale."
+
+data-ar="دعم خرائطي ومكاني لمشاريع الماستر والدكتوراه والبحث من السؤال إلى الخريطة النهائية."
+>
+
+GIS outputs for Master's,
+PhD and research projects —
+from the spatial question
+to the final map.
+
+</p>
+
+
+</article>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+WORKFLOW
+===================================================== -->
+
+<section
+class="workflow"
+id="workflow"
+>
+
+
+<div class="workflow-head reveal">
+
+
+<div>
+
+
+<div
+class="section-id"
+dir="ltr"
+>
+
+02 / WORKFLOW
+
+</div>
+
+
+<h2
+data-en="FROM QUESTION TO MAP."
+data-fr="DE LA QUESTION À LA CARTE."
+data-ar="من السؤال إلى الخريطة."
+>
+
+FROM QUESTION TO MAP.
+
+</h2>
+
+
+</div>
+
+
+<p
+data-en="A clear scientific workflow designed to keep the geographic reasoning visible — not just the final graphic."
+
+data-fr="Une méthode claire pour préserver le raisonnement géographique, et pas seulement produire une belle carte."
+
+data-ar="منهجية واضحة تحافظ على المنطق الجغرافي والتحليل العلمي، وليس فقط الشكل النهائي للخريطة."
+>
+
+A clear scientific workflow designed
+to keep the geographic reasoning visible —
+not just the final graphic.
+
+</p>
+
+
+</div>
+
+
+
+<div class="workflow-grid">
+
+
+<article class="workflow-step reveal">
+
+<span>
+
+01 / SCOPE
+
+</span>
+
+<h3
+data-en="Understand"
+data-fr="Comprendre"
+data-ar="فهم المشكلة"
+>
+
+Understand
+
+</h3>
+
+<p
+data-en="Research question, study area, data and expected output."
+data-fr="Question, zone d'étude, données et résultat attendu."
+data-ar="السؤال البحثي، منطقة الدراسة، البيانات والنتيجة المطلوبة."
+>
+
+Research question, study area,
+data and expected output.
+
+</p>
+
+</article>
+
+
+
+<article class="workflow-step reveal">
+
+<span>
+
+02 / ANALYZE
+
+</span>
+
+<h3
+data-en="Process"
+data-fr="Analyser"
+data-ar="التحليل"
+>
+
+Process
+
+</h3>
+
+<p
+data-en="Spatial processing, indicators, remote sensing or statistics."
+data-fr="Traitements spatiaux, indicateurs, télédétection ou statistiques."
+data-ar="المعالجة المكانية والمؤشرات والاستشعار عن بعد أو الإحصاء."
+>
+
+Spatial processing, indicators,
+remote sensing or statistics.
+
+</p>
+
+</article>
+
+
+
+<article class="workflow-step reveal">
+
+<span>
+
+03 / MAP
+
+</span>
+
+<h3
+data-en="Visualize"
+data-fr="Visualiser"
+data-ar="التمثيل"
+>
+
+Visualize
+
+</h3>
+
+<p
+data-en="Cartographic hierarchy, legends, symbology and scientific clarity."
+data-fr="Hiérarchie cartographique, légende, symbologie et clarté scientifique."
+data-ar="التدرج البصري، الرموز، المفتاح والوضوح الكارتوغرافي."
+>
+
+Cartographic hierarchy,
+legends, symbology
+and scientific clarity.
+
+</p>
+
+</article>
+
+
+
+<article class="workflow-step reveal">
+
+<span>
+
+04 / DELIVER
+
+</span>
+
+<h3
+data-en="Refine"
+data-fr="Finaliser"
+data-ar="الإخراج"
+>
+
+Refine
+
+</h3>
+
+<p
+data-en="Final research-ready output for academic or professional use."
+data-fr="Livrable final adapté à l'usage académique ou professionnel."
+data-ar="مخرج نهائي مناسب للاستخدام الأكاديمي أو المهني."
+>
+
+Final research-ready output
+for academic or professional use.
+
+</p>
+
+</article>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+SOCIAL
+===================================================== -->
+
+<section
+class="social"
+id="connect"
+>
+
+
+<div class="social-head reveal">
+
+
+<div
+class="section-id"
+dir="ltr"
+>
+
+03 / CONNECT
+
+</div>
+
+
+<h2
+data-en="SEE THE WORK. FOLLOW THE PROCESS."
+data-fr="VOIR LE TRAVAIL. SUIVRE LE PROCESSUS."
+data-ar="شاهد الأعمال. وتابع طريقة إنجازها."
+>
+
+SEE THE WORK.<br>
+FOLLOW THE PROCESS.
+
+</h2>
+
+
+<p
+data-en="Maps, workflows, research visuals and GIS content from GeoPrecision Studio."
+data-fr="Cartes, méthodes, visuels scientifiques et contenus SIG de GeoPrecision Studio."
+data-ar="خرائط، مراحل العمل، تصاميم علمية ومحتوى GIS من GeoPrecision Studio."
+>
+
+Maps, workflows, research visuals
+and GIS content from GeoPrecision Studio.
+
+</p>
+
+
+</div>
+
+
+
+<div class="social-grid">
+
+
+<a
+class="social-card instagram reveal"
+
+href="https://www.instagram.com/geoprecision_studio?stkn=YjE4dHNuZmlzMTYw&utm_source=qr"
+
+target="_blank"
+
+rel="noopener noreferrer"
+>
+
+
+<div class="social-top">
+
+
+<span class="social-platform">
+
+INSTAGRAM / @GEOPRECISION_STUDIO
+
+</span>
+
+
+<span class="social-symbol">
+
+◎
+
+</span>
+
+
+</div>
+
+
+
+<h3
+data-en="THE VISUAL PORTFOLIO."
+data-fr="LE PORTFOLIO VISUEL."
+data-ar="واجهة أعمالنا البصرية."
+>
+
+THE VISUAL PORTFOLIO.
+
+</h3>
+
+
+
+<div class="social-bottom">
+
+
+<p
+data-en="Explore maps, cartographic layouts and scientific GIS projects."
+
+data-fr="Découvrez les cartes, mises en page et projets SIG scientifiques."
+
+data-ar="اكتشف الخرائط والتصاميم الكارتوغرافية والمشاريع الجغرافية العلمية."
+>
+
+Explore maps, cartographic layouts
+and scientific GIS projects.
+
+</p>
+
+
+<span class="social-arrow">
+
+↗
+
+</span>
+
+
+</div>
+
+
+</a>
+
+
+
+<a
+class="social-card tiktok reveal"
+
+href="https://www.tiktok.com/@geoprecision.studio?_r=1&_t=ZS-99lKO13Bcma"
+
+target="_blank"
+
+rel="noopener noreferrer"
+>
+
+
+<div class="social-top">
+
+
+<span class="social-platform">
+
+TIKTOK / @GEOPRECISION.STUDIO
+
+</span>
+
+
+<span class="social-symbol">
+
+♪
+
+</span>
+
+
+</div>
+
+
+
+<h3
+data-en="MAPS IN MOTION."
+data-fr="LES CARTES EN MOUVEMENT."
+data-ar="الخرائط أثناء الإنجاز."
+>
+
+MAPS IN MOTION.
+
+</h3>
+
+
+
+<div class="social-bottom">
+
+
+<p
+data-en="Short GIS workflows, visual transformations and mapping content."
+
+data-fr="Workflows SIG courts, transformations visuelles et contenu cartographique."
+
+data-ar="مقاطع قصيرة لخطوات GIS والتحولات البصرية وصناعة الخرائط."
+>
+
+Short GIS workflows,
+visual transformations
+and mapping content.
+
+</p>
+
+
+<span class="social-arrow">
+
+↗
+
+</span>
+
+
+</div>
+
+
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+CTA
+===================================================== -->
+
+<section class="cta reveal">
+
+
+<div>
+
+
+<h2
+data-en="HAVE DATA. NEED A MAP?"
+data-fr="DES DONNÉES. BESOIN D'UNE CARTE ?"
+data-ar="لديك بيانات وتحتاج خريطة؟"
+>
+
+HAVE DATA.<br>
+NEED A MAP?
+
+</h2>
+
+
+<p
+data-en="Send your project details by DM and tell us what you need to analyze or visualize."
+
+data-fr="Envoyez les détails du projet par message privé et précisez ce que vous souhaitez analyser ou visualiser."
+
+data-ar="أرسل تفاصيل مشروعك عبر الخاص وحدد ما الذي تريد تحليله أو تمثيله خرائطيًا."
+>
+
+Send your project details by DM
+and tell us what you need
+to analyze or visualize.
+
+</p>
+
+
+</div>
+
+
+
+<a
+class="cta-button"
+
+href="https://www.instagram.com/geoprecision_studio?stkn=YjE4dHNuZmlzMTYw&utm_source=qr"
+
+target="_blank"
+
+rel="noopener noreferrer"
+>
+
+
+<span
+data-en="DM FOR COLLABORATION"
+data-fr="CONTACTER PAR DM"
+data-ar="تواصل عبر الخاص"
+>
+
+DM FOR COLLABORATION
+
+</span>
+
+
+<span class="arrow">
+
+→
+
+</span>
+
+
+</a>
+
+
+</section>
+
+
+
+<!-- =====================================================
+FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+
+<div class="footer-left">
+
+
+<img
+src="logo.png"
+alt=""
+>
+
+
+<div>
+
+
+<strong>
+
+GeoPrecision Studio
+
+</strong>
+
+
+<p
+data-en="Scientific GIS & Cartography"
+data-fr="SIG scientifique & cartographie"
+data-ar="نظم المعلومات الجغرافية والخرائط العلمية"
+>
+
+Scientific GIS & Cartography
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="footer-right">
+
+
+<span>
+
+ArcGIS Pro
+
+</span>
+
+
+<span>
+
+QGIS
+
+</span>
+
+
+<span>
+
+Remote Sensing
+
+</span>
+
+
+<span>
+
+R
+
+</span>
+
+
+<span>
+
+© 2026 GeoPrecision Studio
+
+</span>
+
+
+</div>
+
+
+</footer>
+
+
+</div>
+
+
+
+<!-- FLOATING INSTAGRAM -->
+
+
+<a
+class="floating-instagram"
+
+href="https://www.instagram.com/geoprecision_studio?stkn=YjE4dHNuZmlzMTYw&utm_source=qr"
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+aria-label="Instagram"
+>
+
+◎
+
+</a>
+
+
+
+<script>
+
+/* =========================================================
+LANGUAGE SYSTEM
+EN → FR → AR → EN
+========================================================= */
+
+const langButton =
+document.getElementById(
+    "languageButton"
+);
+
+
+const translations =
+document.querySelectorAll(
+    "[data-en]"
+);
+
+
+let currentLanguage =
+"en";
+
+
+function applyLanguage(
+    lang
+){
+
+    currentLanguage =
+    lang;
+
+
+    document.documentElement.lang =
+    lang;
+
+
+    document.documentElement.dir =
+    lang === "ar"
+    ?
+    "rtl"
+    :
+    "ltr";
+
+
+    document.body.classList.toggle(
+        "ar",
+        lang === "ar"
+    );
+
+
+    translations.forEach(
+        element=>{
+
+            element.textContent =
+            element.dataset[lang];
+
+        }
+    );
+
+
+    if(
+        lang === "en"
+    ){
+
+        langButton.textContent =
+        "FR";
+
+    }
+
+    else if(
+        lang === "fr"
+    ){
+
+        langButton.textContent =
+        "AR";
+
+    }
+
+    else{
+
+        langButton.textContent =
+        "EN";
+
+    }
+
+}
+
+
+langButton.addEventListener(
+    "click",
+    ()=>{
+
+        if(
+            currentLanguage === "en"
+        ){
+
+            applyLanguage(
+                "fr"
+            );
+
+        }
+
+        else if(
+            currentLanguage === "fr"
+        ){
+
+            applyLanguage(
+                "ar"
+            );
+
+        }
+
+        else{
+
+            applyLanguage(
+                "en"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+SHARE
+========================================================= */
+
+document
+.getElementById(
+    "shareButton"
+)
+.addEventListener(
+    "click",
+    async()=>{
+
+        const shareData={
+
+            title:
+            "GeoPrecision Studio",
+
+            text:
+            currentLanguage === "ar"
+            ?
+            "GeoPrecision Studio — نظم المعلومات الجغرافية والخرائط العلمية"
+            :
+            "GeoPrecision Studio — Scientific GIS & Cartography",
+
+            url:
+            window.location.href
+
+        };
+
+
+        if(
+            navigator.share
+        ){
+
+            try{
+
+                await navigator.share(
+                    shareData
+                );
+
+            }
+
+            catch(error){}
+
+        }
+
+        else if(
+            navigator.clipboard
+        ){
+
+            try{
+
+                await navigator
+                .clipboard
+                .writeText(
+                    window.location.href
+                );
+
+                alert(
+                    currentLanguage === "ar"
+                    ?
+                    "تم نسخ رابط الموقع"
+                    :
+                    "Link copied"
+                );
+
+            }
+
+            catch(error){}
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+SCROLL REVEAL
+========================================================= */
+
+const observer =
+new IntersectionObserver(
+
+    entries=>{
+
+        entries.forEach(
+            entry=>{
+
+                if(
+                    entry.isIntersecting
+                ){
+
+                    entry.target
+                    .classList
+                    .add(
+                        "visible"
+                    );
+
+                    observer
+                    .unobserve(
+                        entry.target
+                    );
+
+                }
+
+            }
+        );
+
+    },
+
+    {
+
+        threshold:.1
+
+    }
+
+);
+
+
+document
+.querySelectorAll(
+    ".reveal"
+)
+.forEach(
+    element=>{
+
+        observer.observe(
+            element
+        );
+
+    }
+);
+
+
+/* =========================================================
+SUBTLE MAP PARALLAX
+DESKTOP ONLY
+========================================================= */
+
+const stage =
+document.querySelector(
+    ".spatial-stage"
+);
+
+
+const stack =
+document.querySelector(
+    ".map-stack"
+);
+
+
+if(
+    window.matchMedia(
+        "(pointer:fine)"
+    ).matches
+){
+
+    stage.addEventListener(
+        "mousemove",
+        event=>{
+
+            const rect =
+            stage.getBoundingClientRect();
+
+
+            const x =
+            (
+                event.clientX -
+                rect.left
+            )
+            /
+            rect.width
+            -
+            .5;
+
+
+            const y =
+            (
+                event.clientY -
+                rect.top
+            )
+            /
+            rect.height
+            -
+            .5;
+
+
+            stack.style.transform =
+            `
+            translate(
+                calc(-50% + ${x*13}px),
+                calc(-50% + ${y*13}px)
+            )
+            `;
+
+        }
+    );
+
+
+    stage.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            stack.style.transform =
+            "translate(-50%,-50%)";
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
